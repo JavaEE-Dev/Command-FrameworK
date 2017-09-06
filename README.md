@@ -14,6 +14,7 @@ Example:
 ```
 public class ExampleCommand extends ACommand {
     public ExampleCommand() {
+            /* Name */ /* Aliases*/ /* Requires perm*/ /* Player only */
         super("example", Arrays.asList("shit", "ass"), false, false);
     }
 
