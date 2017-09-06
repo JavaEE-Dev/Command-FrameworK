@@ -18,7 +18,7 @@ import java.util.List;
  * Do not redistribute without permission from the author.
  */
 public class CommandFramework extends JavaPlugin {
-    @Getter CommandFramework instance;
+    @Getter private CommandFramework instance;
     @Getter private List<ACommand> commands;
     @Getter private CommandMap commandMap;
 
