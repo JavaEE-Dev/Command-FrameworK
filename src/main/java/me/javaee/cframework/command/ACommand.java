@@ -38,52 +38,23 @@ public abstract class ACommand extends BukkitCommand {
     //TODO: Make console only commands.
 
     @Override
-    public boolean execute(CommandSender sender, String label, String[] args) {
-        if (getCommand().equalsIgnoreCase(getName())) {
-            if (playerOnly) {
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-
-                    if (player.isOp()) {
-                        execute(sender, this, label, args);
-                        return true;
-                    }
-
-                    if (requiresPermission) {
-                        if (player.hasPermission("command." + getName())) {
-                            execute(sender, this, label, args);
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You don't have permission to execute this command.");
-                        }
-                    } else {
-                        execute(sender, this, label, args);
-                    }
-                } else {
+        public boolean execute(CommandSender sender, String label, String[] args) {
+            if (getCommand().equalsIgnoreCase(getName())) {
+                if (playerOnly && !(sender instanceof Player)) {
                     sender.sendMessage(ChatColor.RED + "You can't execute this command on Console.");
+                    return true;
                 }
-            } else {
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
 
-                    if (player.isOp()) {
+                if (requiresPermission) {
+                    if (sender.hasPermission("command." + getName()) || sender.isOp()) {
                         execute(sender, this, label, args);
-                        return true;
-                    }
-
-                    if (requiresPermission) {
-                        if (player.hasPermission("command." + getName())) {
-                            execute(sender, this, label, args);
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You don't have permission to execute this command.");
-                        }
                     } else {
-                        execute(sender, this, label, args);
+                        sender.sendMessage(ChatColor.RED + "You don't have permission to execute this command.");
                     }
                 } else {
                     execute(sender, this, label, args);
                 }
             }
+            return true;
         }
-        return true;
-    }
 }
