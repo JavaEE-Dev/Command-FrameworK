@@ -1,0 +1,6 @@
+name: cFramework
+version: ${git.commit.version}
+main: me.javaee.cframework.CommandFramework
+author: JavaEE
+contributors: gari
+description: Simple command framework to not register commands in the plugin.yml
